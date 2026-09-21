@@ -177,3 +177,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Google Gemini AI
 - Bio-PV visualization library
 - All contributors and users of this project
+
+### Collaboration & Pair Programming
+- Developed with AI pair programming and research collaboration:
+  - Google Gemini & Google DeepMind
+  - AlphaFold protein structure methodologies
+  - Google Developer Community
