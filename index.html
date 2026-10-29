@@ -376,8 +376,15 @@
             }
             
             try {
-                // Use the backend proxy to fetch PDB data
-                const response = await fetch(`${BACKEND_URL}/proxy-pdb/${pdbId}.pdb`);
+                // Fetch PDB data (try backend proxy first, fallback directly to official RCSB PDB)
+                let response;
+                try {
+                    response = await fetch(`${BACKEND_URL}/proxy-pdb/${pdbId}.pdb`);
+                    if (!response.ok) throw new Error();
+                } catch (e) {
+                    response = await fetch(`https://files.rcsb.org/download/${pdbId}.pdb`);
+                }
+
                 if (!response.ok) {
                     let errorDetails = `PDB file not found or error fetching: ${response.statusText} (ID: ${pdbId})`;
                     try {
@@ -590,8 +597,9 @@
             }
         });
 
-        // Initial setup for the viewer placeholder
+        // Initial setup for the viewer placeholder and load Crambin (1CRN)
         initViewer(); 
+        loadPdbStructure('1CRN');
     }); 
 </script>
 
